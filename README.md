@@ -10,7 +10,7 @@ We also assume that the operating system is a Linux system which runs systemd se
 2. Copy the generated `id_rsa.pub` file to the SSH server .
 3. Add the line from the file sshd_config_edit to the end of the sshd_config file of your SSH server.
 4. Edit the file rtunnel.service to contain the correct information and add it in the folder 
-/etc/system/systemd/
+/etc/systemd/system/
 5. Clean ~/.ssh/known_hosts  and /root/.ssh/known_hosts if necessary
 6. Open the port `2225` at the SSH server
 5. Run as root the command `systemctl daemon-reload`
