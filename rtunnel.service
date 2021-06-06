@@ -4,16 +4,13 @@ After =  network-online.target
 #Requires
 
 [Service]
-User = root
+User = <ssh_user>
 #Type = forking
 Environment=AUTOSSH_GATETIME=0
-ExecStart = /usr/bin/autossh -M 0 -q  -N -o "PubKeyAuthentication=yes" -o "PasswordAuthentication=no" -o "ExitOnForwardFailure=yes" -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3"  -i /home/username/.ssh/id_rsa -R 2225:localhost:22 -l username   remote-host.com
-ExecStop= /usr/bin/killall autossh
+ExecStart=/usr/bin/autossh -M 0 -N <remote_user>@<remote_host> -p <remote_port> -R <forwarded_port>:localhost:<local_port> -i <remote_identity> -o "PubKeyAuthentication=yes" -o "PasswordAuthentication=no" -o "ExitOnForwardFailure=yes" -o "ServerAliveInterval=30" -o "ServerAliveCountMax=3"
+ExecStop=/usr/bin/killall autossh
 RestartSec=5
 Restart=always
 
-
 [Install]
 WantedBy = multi-user.target
-
-
